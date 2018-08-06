@@ -1,0 +1,61 @@
+<!doctype html>  <!-- 声明文档类型-->
+<html>
+<head>
+    <!--声明当前页面的编码集：charset=gbk,gb2312(中文编码),utf-8国际编码-->
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <title>HTMl模板</title>
+    <meta name="Keyword" content="关键词,关键词">
+    <meta name="description" content="描述">
+    <!--样式-->
+    <style type='text/css'>
+        *{margin:0; padding:0;}
+        ul{list-style:none;}
+        a{text-decoration:none;}
+        .fl{float:left;}
+        .fr{float:right;}
+        .clearfix:after{content:""; display:block; clear:both;}
+
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>这是发布页面</h1>
+    <form action="/admin/article" enctype="multipart/form-data" method="post" >
+        文章标题: <input class="title" type="text" name="title"><br />
+        标签: <input class="tag" type="text" name="tag"><br />
+        作者: <input class="author" type="text" name="author"><br />
+        内容: <input class="content" type="text" name="content"><br />
+        封面: <input class="file" type="file" multiple="multiple" name="wulv1"><br />
+             <input class="file" type="file" multiple="multiple" name="wulv1"><br />
+        <input type="submit" value="发布文章">
+    </form>
+
+
+   <!-- <script>
+        $('button').click(function () {
+            console.log('发布按钮点击了吗')
+            $.ajax({
+                url:'/admin/article',
+                type:'post',
+                dataType:'json',
+                data:{
+                    title:$('.title').val(),
+                    tag:$('.tag').val(),
+                    author:$('.author').val(),
+                    content:$('.content').val()
+                },
+                success:function () {
+                    alert('保存成功');
+                },
+                err:function () {
+                    alert('失败');
+                }
+            })
+        })
+    </script>-->
+
+
+
+
+</body>
+</html>

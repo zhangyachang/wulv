@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <% for(var i in articleListdata){ %>
+    <div>
+        <span> 文章id<%= articleListdata[i]['id'] %></span>
+        <span> 文章id<%= articleListdata[i]['title'] %></span>
+        <span> 文章id<%= articleListdata[i]['tag'] %></span>
+        <span> 文章id<%= articleListdata[i]['author'] %></span>
+        <span> 文章id<%= articleListdata[i]['content'] %></span>
+        <span> 文章id<%= articleListdata[i]['time'] %></span>
+    </div>
+    <% } %>
+
+    <div>
+        <% for(var i=0;i<alldata/2;i++){ %>
+            <a href="/article/list-<%= i+1 %>.html">第<%= i+1 %>页</a>
+
+        <% } %>
+    </div>
+
+</body>
+</html>

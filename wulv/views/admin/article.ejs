@@ -1,0 +1,43 @@
+<!doctype html>  <!-- 声明文档类型-->
+<html>
+<head>
+    <!--声明当前页面的编码集：charset=gbk,gb2312(中文编码),utf-8国际编码-->
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <title>HTMl模板</title>
+    <meta name="Keyword" content="关键词,关键词">
+    <meta name="description" content="描述">
+    <!--样式-->
+    <style type='text/css'>
+        *{margin:0; padding:0;}
+        ul{list-style:none;}
+        a{text-decoration:none;}
+        .fl{float:left;}
+        .fr{float:right;}
+        .clearfix:after{content:""; display:block; clear:both;}
+
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <h1>id<%= data[0]['id']%></h1>
+    <p>标题<%= data[0]['title']%></p>
+    <span>tag <%= data[0]['tag'] %></span>
+    <p>作者 <%= data[0]['author'] %></p>
+    <p>内容<%= data[0]['content'] %></p>
+    <span>时间 <%= data[0]['time']%></span>
+
+
+    <form action="/article/<%= data[0]['id'] %>.html" method="post">
+        评论 <input type="text" name="content">
+    </form>
+
+    <% for(var i in pinglun){ %>
+    <p>评论:<%= pinglun[i]['content']%></p>
+    <% } %>
+
+
+
+
+</body>
+</html>

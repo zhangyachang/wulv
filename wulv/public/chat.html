@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>chat</h1>
+    用户名:
+    <input type="text" class="name"><button class="jinru">进入聊天室</button>
+    <div class="num"></div>
+    <div class="msg"></div>
+
+    <input type="text" class="xiaoxi"><button onclick="submit()">发送</button>
+    <div class="userList"></div>
+    <button class="liaotian">聊天房间</button>
+    <button class="leave">离开</button>
+<script src="socket.io.min.js"></script>
+<script>
+
+    const jinru = document.querySelector('.jinru'),
+        msg = document.querySelector('.msg'),
+        num = document.querySelector('.num'),
+        userList = document.querySelector('.userList'),
+        liaotian = document.querySelector('.liaotian'),
+        leave = document.querySelector('.likai');
+
+    let socket,
+        name,
+        userid;
+
+    liaotian.onclick = function(){
+        socket.emit('jrlt',{ });
+        socket.on('hello',data=>{
+            console.log(data);
+        })
+    };
+    leave.onclick = function(){
+        socket.emit('tclt',{});
+    };
+
+
+    jinru.onclick = function () {
+        name = document.querySelector('.name').value;
+        init(name);
+    };
+
+    function init(username) {
+        userid = Date.now();
+        name = username;
+        console.log(username);
+        socket = io.connect('/');
+        socket.emit('login',{name:name,userid:userid});
+
+        socket.on('login',(data)=>{
+            num.innerHTML = `当前在线人数${data.data.num}`;
+            msg.innerHTML += `${data.data.name}加入了聊天室<br />`;
+            userList.innerHTML = '当前在线成员 <br />';
+            for(let i in data.userList){
+                userList.innerHTML += data.userList[i] + '<br />';
+            }
+        });
+        socket.on('liaotian',(data)=>{
+            msg.innerHTML += `${data.content} <br />`;
+        });
+
+        socket.on('out',data=>{
+            console.log('这是退出');
+            console.log(data);
+            num.innerHTML = `当前在线人数${data.num}`;
+            userList.innerHTML = '当前在线成员 <br />';
+            for(let i in data.userList){
+                userList.innerHTML += data.userList[i] + '<br />';
+            }
+        })
+    }
+
+    function submit() {
+        let txt = document.querySelector('.xiaoxi').value;
+        document.querySelector('.xiaoxi').value = '';
+        socket.emit('msg',{content:txt});
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

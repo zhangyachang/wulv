@@ -1,0 +1,60 @@
+<!doctype html>  <!-- 声明文档类型-->
+<html>
+<head>
+    <!--声明当前页面的编码集：charset=gbk,gb2312(中文编码),utf-8国际编码-->
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <title>HTMl模板</title>
+    <meta name="Keyword" content="关键词,关键词">
+    <meta name="description" content="描述">
+    <!--样式-->
+    <style type='text/css'>
+        *{margin:0; padding:0;}
+        ul{list-style:none;}
+        a{text-decoration:none;}
+        .fl{float:left;}
+        .fr{float:right;}
+        .clearfix:after{content:""; display:block; clear:both;}
+
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<p>这里是updata</p>
+<script>
+    console.log( <% data %> )
+</script>
+
+    <h1>用户资料修改页面</h1>
+
+    <p>用户修改</p>
+        用户id <% data[0]['id'] %>  <br />
+        原始用户名 : <%= data[0]['user'] %>
+        用户名: <input class="input1" type="text"><br>
+        修改前的 : <%= data[1]['admin'] %>
+        管理员: <input class="input2" type="text"><br><br><br>
+
+    <button id="#btn">按钮</button>
+<script type="text/javascript">
+    $('button').on('click',function () {
+        $.ajax({
+            url:'/admin/updateuser',
+            type:'get',
+            dataType:'json',
+            data:{
+                name : $('.input1').val(),
+                admin : $('.input2').val()
+            },
+            success:function (data) {
+            },
+            error:function (data) {
+
+            }
+        })
+    })
+
+
+
+</script>
+
+</body>
+</html>
